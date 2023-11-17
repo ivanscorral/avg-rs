@@ -1,13 +1,24 @@
 use crate::traits::Average;
 
-pub struct SimpleAverage;
+pub struct SimpleAverage<'a> {
+    data: &'a [f64],
+}
 
-impl Average<f64> for SimpleAverage {
-    fn calculate(data: &[f64]) -> Result<f64, &'static str> {
-        if data.is_empty() {
+impl<'a> SimpleAverage<'a> {
+    pub fn new(data: &'a [f64]) -> Self {
+        Self { data }
+    }
+    
+}
+
+impl<'a> Average for SimpleAverage<'a> {
+    
+  
+    fn calculate(&self) -> Result<f64, &'static str> {
+        if self.data.is_empty() {
             return Err("data is empty");
         }
-        let sum: f64 = data.iter().sum();
-        Ok(sum / data.len() as f64)
+        let sum: f64 = self.data.iter().sum();
+        Ok(sum / self.data.len() as f64)
     }
 }

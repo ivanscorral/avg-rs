@@ -1,5 +1,5 @@
 // src/traits/average.rs
 
-pub trait Average<T> {
-    fn calculate(data: &[T]) -> Result<T, &'static str>;
+pub trait Average {
+    fn calculate(&self) -> Result<f64, &'static str>;
 }
